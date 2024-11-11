@@ -20,6 +20,7 @@ public class NoteService {
 
     public Note addNote(Note note) {
         note.setId(new Random().nextInt());
+        db.add(note);
         return note;
     }
 
