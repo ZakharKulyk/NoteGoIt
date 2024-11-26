@@ -1,4 +1,4 @@
-package com.example.todolist.exceptions;
+package com.example.todolist.exception;
 
 public class NoSuchNodeFound extends Exception {
 
