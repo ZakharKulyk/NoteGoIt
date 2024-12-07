@@ -16,7 +16,7 @@ public class AuthController {
 
     @PostMapping("/submit_registration")
     public String processRegistration(){
-        //TODO process user and insert him into db and return to the registration form
+        // process user and insert him into db and return to the registration form
         return null;
     }
 }
