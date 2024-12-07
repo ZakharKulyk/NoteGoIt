@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AuthController {
-    @GetMapping("/login_page")
+    @GetMapping("/registration_page")
     public ModelAndView getRegistrationForm(){
         return new ModelAndView("registration_page");
     }

@@ -14,7 +14,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/login_page").permitAll()
+                                .requestMatchers("/registration_page").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
