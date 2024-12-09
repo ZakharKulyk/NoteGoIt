@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -20,9 +21,9 @@ public class NoteService {
     }
 
 
-    public Note getById(int id) {
+    public Optional<Note> getById(int id) {
         try {
-            return  noteRepository.findById(id).orElseThrow(()->new NoSuchNodeFound("no such node"));
+            return Optional.of(noteRepository.findById(id).orElseThrow(() -> new NoSuchNodeFound("There is no such node")));
         } catch (NoSuchNodeFound e) {
             throw new RuntimeException(e);
         }

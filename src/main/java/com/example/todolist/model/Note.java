@@ -21,6 +21,5 @@ public class Note {
     @Column(name = "content")
     private String content;
 
-    @ManyToMany(mappedBy = "notes")
-    List<User>users = new ArrayList<>();
+
 }
