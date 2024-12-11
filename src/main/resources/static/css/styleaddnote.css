@@ -1,0 +1,75 @@
+/* styles.css (add this to your existing CSS) */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Headings */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Form styles */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 500px; /* Center the form */
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+/* Button styles */
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block; /* Block to take full width */
+    width: 100%; /* Full width button */
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker on hover */
+}
+
+/* Link styles */
+a {
+    text-decoration: none;
+    color: #3498db;
+    display: block; /* Stack links vertically */
+    margin-top: 10px;
+    text-align: center; /* Center the link */
+}
+
+a:hover {
+    text-decoration: underline;
+}
