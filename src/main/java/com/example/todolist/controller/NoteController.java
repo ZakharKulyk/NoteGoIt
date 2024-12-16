@@ -1,63 +1,70 @@
 package com.example.todolist.controller;
 
 import com.example.todolist.crudservice.NoteService;
+import com.example.todolist.dto.request.NoteAddRequest;
+import com.example.todolist.dto.request.NoteUpdateRequest;
+import com.example.todolist.dto.response.NoteAddResponse;
+import com.example.todolist.dto.response.NoteDeleteResponse;
+import com.example.todolist.dto.response.NoteUpdateResponse;
 import com.example.todolist.model.Note;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
-@Controller
-@RequestMapping("/note")
+@RestController
+@RequestMapping("api/v1/notes")
 public class NoteController {
 
-    private  final NoteService noteService;
 
-    @GetMapping("/list")
-    public ModelAndView getAllNotes() {
-        ModelAndView modelAndView = new ModelAndView("listall");
-        modelAndView.addObject("notes", noteService.getAllNotes());
-        return modelAndView;
+    private final NoteService noteService;
+
+    @GetMapping
+    public List<Note> getAllNotes() {
+        return noteService.getAllNotes();
     }
 
-
-    @GetMapping("/delete/{id}")
-    public String deleteNote(@PathVariable("id") int id) {
-        noteService.deleteByID(id);
-        return "redirect:/note/list";
-    }
-
-    @GetMapping("/update/{id}")
-    public ModelAndView getUpdateUI(@PathVariable("id")int id){
-        ModelAndView modelAndView = new ModelAndView("updateform");
-        modelAndView.addObject("note", noteService.getById(id));
-
-        return  modelAndView;
-    }
-
-    @PostMapping("/edit/{id}")
-    public String processChanges(@PathVariable("id") long id, @ModelAttribute(name = "note") Note newNote){
-        noteService.updateNode(newNote);
-        return "redirect:/note/update/"+id;
-    }
-
-    @GetMapping("/addNewNotation")
-    public  ModelAndView getAddNewNotationUI(){
-            return new ModelAndView("addnewnote");
-    }
-
-    @PostMapping("/addNewNotation/save")
-    public  String processAdditionOfNote( String title,  String content){
+    @PostMapping
+    public NoteAddResponse addNote(@RequestBody NoteAddRequest request) {
         Note note = new Note();
 
-        note.setContent(content);
-        note.setTitle(title);
+        note.setTitle(request.getTitle());
+        note.setContent(request.getContent());
 
         noteService.addNote(note);
 
-        return "redirect:/note/list";
+        return NoteAddResponse.success(note.getTitle(), note.getContent());
 
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Note> getNoteById(@PathVariable int id) {
+        return noteService.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public NoteDeleteResponse deleteNote(@PathVariable("id") int id) {
+        if (noteService.deleteByID(id) == 1) {
+            return NoteDeleteResponse.success(id);
+        }
+        return NoteDeleteResponse.failed(id);
+    }
+
+    @PutMapping
+    public NoteUpdateResponse updateNode(@RequestBody NoteUpdateRequest request) {
+        Note note = new Note();
+
+        note.setContent(request.getContent());
+        note.setTitle(request.getTitle());
+        note.setId(request.getId());
+
+        noteService.updateNode(note);
+
+        return NoteUpdateResponse.success(note.getTitle(), note.getContent(), note.getId());
     }
 
 }

@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+
 @Service
 @AllArgsConstructor
 public class NoteService {
     private final NoteRepository noteRepository;
-
 
     public List<Note> getAllNotes() {
         return noteRepository.findAll();
@@ -35,8 +35,13 @@ public class NoteService {
         return note;
     }
 
-    public void deleteByID(int id) {
-        noteRepository.deleteById(id);
+    public int deleteByID(int id) {
+        try {
+            noteRepository.deleteById(id);
+        }catch (Exception ex){
+            return 0;
+        }
+       return 1;
     }
 
     public void updateNode(Note note) {
