@@ -20,6 +20,7 @@ import java.util.Optional;
 public class NoteController {
 
 
+
     private final NoteService noteService;
 
     @GetMapping
@@ -37,7 +38,6 @@ public class NoteController {
         noteService.addNote(note);
 
         return NoteAddResponse.success(note.getTitle(), note.getContent());
-
     }
 
     @GetMapping("/{id}")

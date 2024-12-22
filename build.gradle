@@ -41,9 +41,14 @@ dependencies {
 //	 https://mvnrepository.com/artifact/org.springframework/spring-webmvc
 	implementation group: 'org.springframework', name: 'spring-webmvc', version: '6.1.13'
 	implementation 'org.flywaydb:flyway-core'
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.6.0'
+
 
 
 }
+
+
 
 tasks.named('test') {
 	useJUnitPlatform()
